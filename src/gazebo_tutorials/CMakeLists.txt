@@ -3,16 +3,14 @@ project(gazebo_tutorials)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 
+
 find_package(catkin REQUIRED COMPONENTS 
-	roscpp
+    roscpp
     rospy
     gazebo_ros
     gazebo_plugins
     gazebo_msgs
     std_msgs
-    message_generation
-    robosub
-    robosub_msgs
 )
 
 find_package(gazebo REQUIRED)
@@ -22,6 +20,6 @@ include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS} ${GAZEBO
 
 
 catkin_package(
-  DEPENDS gazebo_ros gazebo_plugins roscpp
+  DEPENDS roscpp rospy gazebo_ros gazebo_plugins gazebo_msgs std_msgs 
 )
 add_subdirectory(src)
