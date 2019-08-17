@@ -19,6 +19,10 @@ namespace gazebo
     /// \param[in] _sdf A pointer to the plugin's SDF element.
     public: virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     {
+      double velocity = 0;
+
+      if (_sdf -> HasElement("velocity"))
+        velocity = _sdf->Get<double>("velocity");
       // Safety check
       if (_model->GetJointCount() == 0)
       {
@@ -43,7 +47,7 @@ namespace gazebo
       // Set the joint's target velocity. This target velocity is just
       // for demonstration purposes.
       this->model->GetJointController()->SetVelocityTarget(
-          this->joint->GetScopedName(), 10.0);
+          this->joint->GetScopedName(), velocity);
     }
     /// \brief Pointer to the model.
     private: physics::ModelPtr model;
