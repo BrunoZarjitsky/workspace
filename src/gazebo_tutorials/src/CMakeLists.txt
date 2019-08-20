@@ -9,3 +9,9 @@ target_link_libraries(RayPlugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${Boost_
 # Build our plugin
 add_library(velodyne_plugin SHARED velodyne_plugin.cpp)
 target_link_libraries(velodyne_plugin ${GAZEBO_LIBRARIES})
+
+
+# Build the stand-alone test program
+add_executable(vel vel.cpp)
+
+target_link_libraries(vel ${GAZEBO_LIBRARIES})
