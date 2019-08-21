@@ -46,7 +46,7 @@ namespace gazebo
       // Get the first joint. We are making an assumption about the model
       // having one joint that is the rotational joint.
       
-      //SELECIONA EM QUAL JOINT VAI ATUAR
+      //SELECIONA EM QUAIS JOINTS VAI ATUAR
       this->Roda1 = _model->GetJoints()[0];
       this->Roda2 = _model->GetJoints()[1];
       this->Roda3 = _model->GetJoints()[2];
