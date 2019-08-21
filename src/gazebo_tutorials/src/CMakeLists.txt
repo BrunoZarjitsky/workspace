@@ -11,6 +11,10 @@ add_library(velodyne_plugin SHARED velodyne_plugin.cpp)
 target_link_libraries(velodyne_plugin ${GAZEBO_LIBRARIES})
 
 
+# Build our plugin
+add_library(skate_plugin SHARED skate_plugin.cpp)
+target_link_libraries(skate_plugin ${GAZEBO_LIBRARIES})
+
 # Build the stand-alone test program
 add_executable(vel vel.cpp)
 

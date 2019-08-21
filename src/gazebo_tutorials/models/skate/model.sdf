@@ -2,7 +2,7 @@
 <sdf version='1.6'>
   <model name='skate'>
     <pose frame=''>0 0 0.03 0 -0 0</pose>
-    <link name='link_0'>
+    <link name='roda1'>
       <pose frame=''>-0.23 -0.125 -0.006 0 -0 0</pose>
       <inertial>
         <mass>0.01</mass>
@@ -100,7 +100,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_1'>
+    <link name='roda2'>
       <pose frame=''>0.23 -0.125 -0.006 0 -0 0</pose>
       <inertial>
         <mass>0.01</mass>
@@ -198,7 +198,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_2'>
+    <link name='roda3'>
       <pose frame=''>-0.23 0.125 -0.006 0 -0 0</pose>
       <inertial>
         <mass>0.01</mass>
@@ -296,7 +296,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_3'>
+    <link name='roda4'>
       <pose frame=''>0.23 0.125 -0.006 0 -0 0</pose>
       <inertial>
         <mass>0.01</mass>
@@ -394,7 +394,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_4'>
+    <link name='mainFrame'>
       <pose frame=''>0 0 0.024 0 -0 0</pose>
       <inertial>
         <mass>0.1</mass>
@@ -491,9 +491,9 @@
         </surface>
       </collision>
     </link>
-    <joint name='link_4_JOINT_0' type='revolute'>
-      <parent>link_4</parent>
-      <child>link_0</child>
+    <joint name='mainFrame_Roda1' type='revolute'>
+      <parent>mainFrame</parent>
+      <child>roda1</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
@@ -524,9 +524,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='link_4_JOINT_1' type='revolute'>
-      <parent>link_4</parent>
-      <child>link_1</child>
+    <joint name='mainFrame_Roda2' type='revolute'>
+      <parent>mainFrame</parent>
+      <child>roda2</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
@@ -557,9 +557,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='link_4_JOINT_2' type='revolute'>
-      <parent>link_4</parent>
-      <child>link_2</child>
+    <joint name='mainFrame_Roda3' type='revolute'>
+      <parent>mainFrame</parent>
+      <child>roda3</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
@@ -590,9 +590,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='link_4_JOINT_3' type='revolute'>
-      <parent>link_4</parent>
-      <child>link_3</child>
+    <joint name='mainFrame_Roda4' type='revolute'>
+      <parent>mainFrame</parent>
+      <child>roda4</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
