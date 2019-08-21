@@ -55,11 +55,13 @@ namespace gazebo
       // Apply the P-controller to the joint.
       this->model->GetJointController()->SetVelocityPID(
           this->Roda1->GetScopedName(), this->pid);
+      this->model->GetJointController()->SetVelocityPID(
+          this->Roda2->GetScopedName(), this->pid);
+      this->model->GetJointController()->SetVelocityPID(
+          this->Roda3->GetScopedName(), this->pid);
+      this->model->GetJointController()->SetVelocityPID(
+          this->Roda4->GetScopedName(), this->pid);
 
-      // Set the joint's target velocity. This target velocity is just
-      // for demonstration purposes.
-      this->model->GetJointController()->SetVelocityTarget(
-          this->Roda1->GetScopedName(), velocity);
       // Create the node
       this->node = transport::NodePtr(new transport::Node());
       #if GAZEBO_MAJOR_VERSION < 8
