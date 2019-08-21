@@ -14,10 +14,10 @@
 namespace gazebo
 {
   /// \brief A plugin to control a Velodyne sensor.
-  class VelodynePlugin : public ModelPlugin
+  class SkatePlugin : public ModelPlugin
   {
     /// \brief Constructor
-    public: VelodynePlugin() {}
+    public: SkatePlugin() {}
 
     /// \brief The load function is called by Gazebo when the plugin is
     /// inserted into simulation
@@ -69,7 +69,7 @@ namespace gazebo
 
       // Subscribe to the topic, and register a callback
       this->sub = this->node->Subscribe(topicName,
-        &VelodynePlugin::OnMsg, this);
+        &SkatePlugin::OnMsg, this);
 
       // Initialize ros, if it has not already bee initialized.
       if (!ros::isInitialized())
@@ -89,13 +89,13 @@ namespace gazebo
         ros::SubscribeOptions::create<std_msgs::Float32>(
             "/" + this->model->GetName() + "/vel_cmd",
             1,
-            boost::bind(&VelodynePlugin::OnRosMsg, this, _1),
+            boost::bind(&SkatePlugin::OnRosMsg, this, _1),
             ros::VoidPtr(), &this->rosQueue);
       this->rosSub = this->rosNode->subscribe(so);
 
       // Spin up the queue helper thread.
       this->rosQueueThread =
-        std::thread(std::bind(&VelodynePlugin::QueueThread, this));
+        std::thread(std::bind(&SkatePlugin::QueueThread, this));
     }
 
 
@@ -162,6 +162,6 @@ namespace gazebo
     };
 
   // Tell Gazebo about this plugin, so that Gazebo can call Load on this plugin.
-  GZ_REGISTER_MODEL_PLUGIN(VelodynePlugin)
+  GZ_REGISTER_MODEL_PLUGIN(SkatePlugin)
 }
 #endif
