@@ -31,7 +31,10 @@ namespace gazebo
       if (_sdf -> HasElement("velocity"))
         velocity = _sdf->Get<double>("velocity");
       // Safety check
-      if (_model->GetJointCount() == 0)
+      // Conta quantos joints tem no robo
+      jointCount = _model->GetJointCount();
+      ROS_INFO_STREAM(jointCount << " joints carregados do robo!");
+      if (jointCount == 0)
       {
         std::cerr << "Invalid joint count, Velodyne plugin not loaded\n";
         return;
@@ -48,6 +51,7 @@ namespace gazebo
       this->Roda2 = _model->GetJoints()[1];
       this->Roda3 = _model->GetJoints()[2];
       this->Roda4 = _model->GetJoints()[3];
+      ROS_INFO_STREAM("Joints carregados com sucesso");
 
       // Setup a P-controller, with a gain of 0.1.
       this->pid = common::PID(0.1, 0, 0);
@@ -104,6 +108,7 @@ namespace gazebo
         std::thread(std::bind(&SkatePlugin::QueueThread, this));
     }
 
+    private: int jointCount;
 
     /// \brief Set the velocity of the Velodyne
     /// \param[in] _vel New target velocity
@@ -112,6 +117,12 @@ namespace gazebo
       // Set the joint's target velocity.
       this->model->GetJointController()->SetVelocityTarget(
           this->Roda1->GetScopedName(), _vel);
+      this->model->GetJointController()->SetVelocityTarget(
+          this->Roda2->GetScopedName(), _vel);
+      this->model->GetJointController()->SetVelocityTarget(
+          this->Roda3->GetScopedName(), _vel);
+      this->model->GetJointController()->SetVelocityTarget(
+          this->Roda4->GetScopedName(), _vel);
     }
     /// \brief Pointer to the model.
     private: physics::ModelPtr model;
@@ -153,8 +164,8 @@ namespace gazebo
 
     /// \brief Handle an incoming message from ROS
     /// \param[in] _msg A float value that is used to set the velocity
-    /// of the Velodyne.
-    public: void OnRosMsg(const std_msgs::Float32ConstPtr &_msg)
+    /// of the Velodyne. const sensor_msgs::Imu::ConstPtr& msg
+    public: void OnRosMsg(const std_msgs::Float32::ConstPtr& _msg)
     {
       this->SetVelocity(_msg->data);
     }
