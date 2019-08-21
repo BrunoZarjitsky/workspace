@@ -31,7 +31,6 @@ namespace gazebo
       if (_sdf -> HasElement("velocity"))
         velocity = _sdf->Get<double>("velocity");
       // Safety check
-      std::cerr << _model->GetJointCount();
       if (_model->GetJointCount() == 0)
       {
         std::cerr << "Invalid joint count, Velodyne plugin not loaded\n";
@@ -43,19 +42,24 @@ namespace gazebo
 
       // Get the first joint. We are making an assumption about the model
       // having one joint that is the rotational joint.
-      this->joint = _model->GetJoints()[0];
+      
+      //SELECIONA EM QUAL JOINT VAI ATUAR
+      this->Roda1 = _model->GetJoints()[0];
+      this->Roda2 = _model->GetJoints()[1];
+      this->Roda3 = _model->GetJoints()[2];
+      this->Roda4 = _model->GetJoints()[3];
 
       // Setup a P-controller, with a gain of 0.1.
       this->pid = common::PID(0.1, 0, 0);
 
       // Apply the P-controller to the joint.
       this->model->GetJointController()->SetVelocityPID(
-          this->joint->GetScopedName(), this->pid);
+          this->Roda1->GetScopedName(), this->pid);
 
       // Set the joint's target velocity. This target velocity is just
       // for demonstration purposes.
       this->model->GetJointController()->SetVelocityTarget(
-          this->joint->GetScopedName(), velocity);
+          this->Roda1->GetScopedName(), velocity);
       // Create the node
       this->node = transport::NodePtr(new transport::Node());
       #if GAZEBO_MAJOR_VERSION < 8
@@ -105,13 +109,16 @@ namespace gazebo
     {
       // Set the joint's target velocity.
       this->model->GetJointController()->SetVelocityTarget(
-          this->joint->GetScopedName(), _vel);
+          this->Roda1->GetScopedName(), _vel);
     }
     /// \brief Pointer to the model.
     private: physics::ModelPtr model;
 
     /// \brief Pointer to the joint.
-    private: physics::JointPtr joint;
+    private: physics::JointPtr Roda1;
+    private: physics::JointPtr Roda2;
+    private: physics::JointPtr Roda3;
+    private: physics::JointPtr Roda4;
 
     /// \brief A PID controller for the joint.
     private: common::PID pid;
